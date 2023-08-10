@@ -48,18 +48,54 @@
       item-value="name"
       loading-text
       show-select
-    ></v-data-table>
+      return-object
+      item-selectable="selectable"
+      select-strategy="all"
+      v-model:sort-by="sortBy"
+    >
+    </v-data-table>
+    <v-card>
+      <pre>{{ selected }}</pre>
+    </v-card>
   </v-card>
 
-  <h3 class="text-center">V-data-table-server</h3>
+  <h3 class="text-center">V-data-table-pagination</h3>
+
+  <v-card>
+    <v-row class="ma-5">
+      <v-col cols="4">
+        <v-text-field
+          placeholder="Search"
+          prepend-icon="mdi-magnify"
+          v-model="search"
+        ></v-text-field>
+      </v-col>
+    </v-row>
+  </v-card>
+  <v-data-table
+    :items="desserts"
+    :custom-filter="FilterOnlyCaps"
+    :headers="headers"
+    :page="page"
+    :search="search"
+    :items-per-page="itemPerPage"
+    hide-default-footer
+  >
+    <template v-slot:bottom>
+      <v-pagination :length="pageCount" v-model="page"> </v-pagination>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
 export default {
   data() {
     return {
+      search: "",
+      page: 1,
+      sortBy: [{ key: "calories", order: "asc" }],
       itemPerPage: 5,
-      selected:[],
+      selected: [],
       headers: [
         {
           title: "Dessert (100g serving)",
@@ -89,6 +125,7 @@ export default {
           carbs: 94,
           protein: 0.0,
           iron: "0",
+          selectable: false,
         },
         {
           name: "KitKat",
@@ -97,6 +134,7 @@ export default {
           carbs: 65,
           protein: 7,
           iron: "6",
+          selectable: false,
         },
         {
           name: "Eclair",
@@ -156,6 +194,22 @@ export default {
         },
       ],
     };
+  },
+
+  methods: {
+    FilterOnlyCaps(value, query, item) {
+      return (
+        value != null &&
+        query != null &&
+        typeof value === "string" &&
+        value.toString().toLocaleUpperCase().indexOf(query) !== -1
+      );
+    },
+  },
+  computed: {
+    pageCount() {
+      return Math.ceil(this.desserts.length / this.itemPerPage);
+    },
   },
 };
 </script>

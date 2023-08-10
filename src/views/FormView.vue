@@ -7,6 +7,8 @@
     <RangeSlider />
     <Select/>
     <Sliders/>
+    <Switches/>
+<TextFields/>
 </template>
 
 <script>
@@ -18,10 +20,12 @@ import Form from '@/components/FormControls/Form.vue'
 import RangeSlider from '@/components/FormControls/RangeSlider.vue'
 import Select from '@/components/FormControls/Select.vue'
 import Sliders from '@/components/FormControls/Sliders.vue'
+import Switches from '@/components/FormControls/Switches.vue'
+import TextFields from '@/components/FormControls/TextFields.vue'
 
 
 export default {
     name: "FormView",
-    components: {AutoCompletes, CheckboxComponenet, FileInputs ,ComboBox, Form, RangeSlider,Select,Sliders,  }
+    components: { AutoCompletes, CheckboxComponenet, FileInputs, ComboBox, Form, RangeSlider, Select, Sliders, Switches, TextFields }
 }
 </script>
