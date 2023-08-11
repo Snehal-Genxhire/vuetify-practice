@@ -7,7 +7,7 @@
         <v-btn variant="text" icon="mdi-magnify"></v-btn>
         <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
      </v-app-bar>
-     <v-app-bar color="warning"  scroll-behavior="fade-image"
+     <v-app-bar color="warning"  scroll-behavior="fade-image inverted collapse" 
   image="https://picsum.photos/1920/1080?random">
         <v-app-bar-nav-icon variant="text"></v-app-bar-nav-icon>
         <v-app-bar-title>Dashboard</v-app-bar-title>
